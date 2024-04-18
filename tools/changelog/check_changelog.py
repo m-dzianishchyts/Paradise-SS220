@@ -127,7 +127,7 @@ except Exception as e:
         pr.add_to_labels(CL_INVALID)
     if has_valid_label:
         pr.remove_from_labels(CL_VALID)
-    exit(0)
+    exit(1)
 
 if write_cl['changes']:
     print("CL OK!")
