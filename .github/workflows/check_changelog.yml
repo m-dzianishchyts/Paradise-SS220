@@ -28,5 +28,5 @@ jobs:
           pip install ruamel.yaml PyGithub
       - name: Changelog validation
         env:
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_TOKEN: ${{ github.token }}
         run: python check_changelog.py
