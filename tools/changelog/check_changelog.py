@@ -42,7 +42,7 @@ def parse_changelog(message: str) -> dict:
         tag = change_parse_result["tag"]
         message = change_parse_result["message"]
         if tag not in tags['tags'].keys():
-            raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {tags['tags'].keys()}")
+            raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tags['tags'].keys())}")
         if not message:
             raise Exception(f"No message for change: '{cl_line}'")
         if message in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
