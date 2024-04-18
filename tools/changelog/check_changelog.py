@@ -46,7 +46,7 @@ def parse_changelog(message: str) -> dict:
         if message in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
             raise Exception(f"Don't use default message for change: '{cl_line}'")
         if tag:
-            if tag in tags['tags'].keys()
+            if tag in tags['tags'].keys():
                 cl_changes.append({
                     "tag": CL_NORMALIZED_TAG[change_parse_result.group("tag")],
                     "message": change_parse_result.group("message")
@@ -111,7 +111,8 @@ write_cl = {}
 try:
     write_cl = build_changelog(pr)
 except Exception as e:
-    logging.error("CL parsing error", e)
+    print("CL parsing error")
+    print(e)
 
     if not cl_required:
         # remove invalid, remove valid
