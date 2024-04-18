@@ -12,7 +12,7 @@ on:
 jobs:
   CheckCL:
     runs-on: ubuntu-latest
-    if: github.repository == 'ss220club/Paradise-SS220' && github.base_ref == 'master' && github.event.pull_request.draft == false
+    if: github.base_ref == 'master' && github.event.pull_request.draft == false
     steps:
       - name: Downloading scripts
         run: |
