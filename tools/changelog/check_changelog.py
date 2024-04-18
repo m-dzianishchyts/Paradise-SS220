@@ -15,8 +15,59 @@ from ruamel.yaml import YAML
 from github import Github
 import json
 
-CL_BODY = re.compile(r"(:cl:|🆑)(.+)?\n((.|\n|)+?)\n\/(:cl:|🆑)", re.MULTILINE)
-CL_SPLIT = re.compile(r"(^\w+):\s+(\w.+)", re.MULTILINE)
+CL_BODY = re.compile(r"(:cl:|🆑)[ \t]*(?P<author>.+?)?\s*\n(?P<content>(.|\n)*?)\n/(:cl:|🆑)", re.MULTILINE)
+CL_SPLIT = re.compile(r"\s*((?P<tag>\w+)\s*:)?\s*(?P<message>.*)")
+
+
+def build_changelog(pr: dict) -> dict:
+    changelog = parse_changelog(pr["body"])
+    changelog["author"] = changelog["author"] or pr["user"]["login"]
+    return changelog
+
+
+def parse_changelog(message: str) -> dict:
+    with open(Path.cwd().joinpath("tags.yml")) as file:
+        yaml = YAML(typ = 'safe', pure = True)
+        tags = yaml.load(file)
+    cl_parse_result = CL_BODY.search(message)
+    if cl_parse_result is None:
+        raise Exception("Failed to parse the changelog. Check changelog format.")
+    cl_changes = []
+    for cl_line in cl_parse_result.group("content").splitlines():
+        if not cl_line:
+            continue
+        change_parse_result = CL_SPLIT.search(cl_line)
+        if not change_parse_result:
+            raise Exception(f"Invalid change: '{cl_line}'")
+        tag = change_parse_result["tag"]
+        message = change_parse_result["message"]
+        if not message:
+            raise Exception(f"No message for change: '{cl_line}'")
+        if message in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
+            raise Exception(f"Don't use default message for change: '{cl_line}'")
+        if tag:
+            if tag in tags['tags'].keys()
+                cl_changes.append({
+                    "tag": CL_NORMALIZED_TAG[change_parse_result.group("tag")],
+                    "message": change_parse_result.group("message")
+                })
+            else:
+                raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {tags['tags'].keys()}")
+        # Append line without tag to the previous change
+        else:
+            if len(cl_changes):
+                prev_change = cl_changes[-1]
+                prev_change["message"] += f" {change_parse_result['message']}"
+            else:
+                raise Exception(f"Change with no tag: {cl_line}")
+
+    if len(cl_changes) == 0:
+        raise Exception("No changes found in the changelog. Use special label if changelog is not expected.")
+    return {
+        "author": str.strip(cl_parse_result.group("author") or "") or None,  # I want this to be None, not empty
+        "changes": cl_changes
+    }
+
 
 # Blessed is the GoOnStAtIoN birb ZeWaKa for thinking of this first
 repo = os.getenv("GITHUB_REPOSITORY")
@@ -58,10 +109,9 @@ if pr_is_mirror:
 
 write_cl = {}
 try:
-    cl = CL_BODY.search(pr_body)
-    cl_list = CL_SPLIT.findall(cl.group(3))
-except AttributeError:
-    print("No CL found!")
+    write_cl = build_changelog(pr)
+except Exception as e:
+    logging.error("CL parsing error", e)
 
     if not cl_required:
         # remove invalid, remove valid
@@ -77,36 +127,6 @@ except AttributeError:
     if has_valid_label:
         pr.remove_from_labels(CL_VALID)
     exit(0)
-
-
-if cl.group(2) is not None:
-    write_cl['author'] = cl.group(2).strip()
-else:
-    write_cl['author'] = pr_author
-
-if not write_cl['author']:
-    print("There are spaces or tabs instead of author username")
-
-with open(Path.cwd().joinpath("tags.yml")) as file:
-    yaml = YAML(typ='safe',pure=True)
-    tags = yaml.load(file)
-
-write_cl['changes'] = []
-
-has_invalid_tag = False
-for k, v in cl_list:
-    if k in tags['tags'].keys(): # Check to see if there are any valid tags, as determined by tags.yml
-        v = v.rstrip()
-        if v not in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
-            write_cl['changes'].append({tags['tags'][k]: v})
-    else:
-        print(f"Tag {k} is invalid!")
-        has_invalid_tag = True
-
-if has_invalid_tag:
-    print("CL has invalid tags!")
-    print("Valid tags are:")
-    print(*tags['tags'].keys(), sep=", ")
 
 if write_cl['changes']:
     print("CL OK!")
