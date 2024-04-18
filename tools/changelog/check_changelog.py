@@ -48,8 +48,8 @@ def parse_changelog(message: str) -> dict:
         if tag:
             if tag in tags['tags'].keys():
                 cl_changes.append({
-                    "tag": CL_NORMALIZED_TAG[change_parse_result.group("tag")],
-                    "message": change_parse_result.group("message")
+                    "tag": tag,
+                    "message": message
                 })
             else:
                 raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {tags['tags'].keys()}")
