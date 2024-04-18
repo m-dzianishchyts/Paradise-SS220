@@ -111,8 +111,7 @@ write_cl = {}
 try:
     write_cl = build_changelog(pr)
 except Exception as e:
-    print("CL parsing error")
-    print(e)
+    print("CL parsing error: ", e)
 
     if not cl_required:
         # remove invalid, remove valid
