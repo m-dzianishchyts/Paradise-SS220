@@ -20,8 +20,8 @@ CL_SPLIT = re.compile(r"\s*((?P<tag>\w+)\s*:)?\s*(?P<message>.*)")
 
 
 def build_changelog(pr: dict) -> dict:
-    changelog = parse_changelog(pr["body"])
-    changelog["author"] = changelog["author"] or pr["user"]["login"]
+    changelog = parse_changelog(pr.body)
+    changelog["author"] = changelog["author"] or pr.user.login
     return changelog
 
 
