@@ -155,7 +155,7 @@ if not cl_required:
 
 try:
     cl = build_changelog(pr)
-    cl_emoji = emojify_changelog(write_cl)
+    cl_emoji = emojify_changelog(cl)
     cl_emoji["author"] = cl_emoji["author"] or pr_author
     validate_changelog(cl_emoji)
 except Exception as e:
