@@ -41,18 +41,17 @@ def parse_changelog(message: str) -> dict:
             raise Exception(f"Invalid change: '{cl_line}'")
         tag = change_parse_result["tag"]
         message = change_parse_result["message"]
+        if tag and tag not in tags['tags'].keys():
+            raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tags['tags'].keys())}")
         if not message:
             raise Exception(f"No message for change: '{cl_line}'")
         if message in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
             raise Exception(f"Don't use default message for change: '{cl_line}'")
         if tag:
-            if tag in tags['tags'].keys():
-                cl_changes.append({
-                    "tag": tag,
-                    "message": message
-                })
-            else:
-                raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {tags['tags'].keys()}")
+            cl_changes.append({
+                "tag": tag,
+                "message": message
+            })
         # Append line without tag to the previous change
         else:
             if len(cl_changes):
@@ -127,7 +126,7 @@ except Exception as e:
         pr.add_to_labels(CL_INVALID)
     if has_valid_label:
         pr.remove_from_labels(CL_VALID)
-    exit(0)
+    exit(1)
 
 if write_cl['changes']:
     print("CL OK!")
