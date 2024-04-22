@@ -62,7 +62,7 @@ def validate_changelog(changelog: str):
 def parse_changelog(message: str) -> dict:
     with open(Path.cwd().joinpath("tags.yml")) as file:
         yaml = YAML(typ = 'safe', pure = True)
-        tags = yaml.load(file)
+        tags_config = yaml.load(file)
     cl_parse_result = CL_BODY.search(message)
     if cl_parse_result is None:
         raise Exception("Failed to parse the changelog. Check changelog format.")
@@ -75,15 +75,15 @@ def parse_changelog(message: str) -> dict:
             raise Exception(f"Invalid change: '{cl_line}'")
         tag = change_parse_result["tag"]
         message = change_parse_result["message"]
-        if tag and tag not in tags['tags'].keys():
-            raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tags['tags'].keys())}")
+        if tag and tag not in tags_config['tags'].keys():
+            raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tags_config['tags'].keys())}")
         if not message:
             raise Exception(f"No message for change: '{cl_line}'")
-        if message in list(tags['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
+        if message in list(tags_config['defaults'].values()): # Check to see if the tags are associated with something that isn't the default text
             raise Exception(f"Don't use default message for change: '{cl_line}'")
         if tag:
             cl_changes.append({
-                "tag": tag,
+                "tag": tags_config['tags'][tag],
                 "message": message
             })
         # Append line without tag to the previous change
