@@ -15,14 +15,47 @@ from ruamel.yaml import YAML
 from github import Github
 import json
 
+DISCORD_EMBED_DESCRIPTION_LIMIT = 4096
+
 CL_BODY = re.compile(r"(:cl:|🆑)[ \t]*(?P<author>.+?)?\s*\n(?P<content>(.|\n)*?)\n/(:cl:|🆑)", re.MULTILINE)
 CL_SPLIT = re.compile(r"\s*((?P<tag>\w+)\s*:)?\s*(?P<message>.*)")
+
+DISCORD_TAG_EMOJI = {
+    "soundadd": ":notes:",
+    "sounddel": ":mute:",
+    "imageadd": ":frame_photo:",
+    "imagedel": ":scissors:",
+    "codeadd": ":sparkles:",
+    "codedel": ":wastebasket:",
+    "tweak": ":screwdriver:",
+    "fix": ":tools:",
+    "wip": ":construction_site:",
+    "spellcheck": ":pencil:",
+    "experiment": ":microscope:"
+}
 
 
 def build_changelog(pr: dict) -> dict:
     changelog = parse_changelog(pr.body)
     changelog["author"] = changelog["author"] or pr.user.login
     return changelog
+
+
+def emojify_changelog(changelog: dict):
+    changelog_copy = copy.deepcopy(changelog)
+    for change in changelog_copy["changes"]:
+        if change["tag"] in DISCORD_TAG_EMOJI:
+            change["tag"] = DISCORD_TAG_EMOJI[change["tag"]]
+        else:
+            raise Exception(f"Invalid tag for emoji: {change}")
+    return changelog_copy
+
+
+def validate_changelog(changelog: str):
+    if not changelog:
+        raise Exception("Empty changelog.")
+    if len(changelog) > DISCORD_EMBED_DESCRIPTION_LIMIT:
+        raise Exception(f"The changelog exceeds the length limit ({DISCORD_EMBED_DESCRIPTION_LIMIT}). Shorten it.")
 
 
 def parse_changelog(message: str) -> dict:
@@ -106,20 +139,21 @@ for label in pr_labels:
 if pr_is_mirror:
     cl_required = False
 
-write_cl = {}
+if not cl_required:
+    # remove invalid, remove valid
+    if has_invalid_label:
+        pr.remove_from_labels(CL_INVALID)
+    if has_valid_label:
+        pr.remove_from_labels(CL_VALID)
+    exit(1)
+
 try:
     write_cl = build_changelog(pr)
+    message = emojify_changelog(write_cl)
+    validate_changelog(message)
 except Exception as e:
-    print("CL parsing error")
+    print("Changelog parsing error:")
     print(e)
-
-    if not cl_required:
-        # remove invalid, remove valid
-        if has_invalid_label:
-            pr.remove_from_labels(CL_INVALID)
-        if has_valid_label:
-            pr.remove_from_labels(CL_VALID)
-        exit(0)
 
     # add invalid, remove valid
     if not has_invalid_label:
@@ -128,19 +162,9 @@ except Exception as e:
         pr.remove_from_labels(CL_VALID)
     exit(1)
 
-if write_cl['changes']:
-    print("CL OK!")
-    # remove invalid, add valid
-    if has_invalid_label:
-        pr.remove_from_labels(CL_INVALID)
-    if not has_valid_label:
-        pr.add_to_labels(CL_VALID)
-else:
-    print("No CL changes detected!")
-    # add invalid, remove valid
-    if not has_invalid_label:
-        pr.add_to_labels(CL_INVALID)
-    if has_valid_label:
-        pr.remove_from_labels(CL_VALID)
-
-exit(0)
+# remove invalid, add valid
+if has_invalid_label:
+    pr.remove_from_labels(CL_INVALID)
+if not has_valid_label:
+    pr.add_to_labels(CL_VALID)
+print("Changelog is valid.")
