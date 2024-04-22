@@ -10,6 +10,7 @@ GITHUB_EVENT_PATH: path to JSON file containing the event info (Action provided)
 """
 import os
 import re
+import copy
 from pathlib import Path
 from ruamel.yaml import YAML
 from github import Github
