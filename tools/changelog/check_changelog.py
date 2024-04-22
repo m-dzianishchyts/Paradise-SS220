@@ -52,10 +52,15 @@ def emojify_changelog(changelog: dict):
     return changelog_copy
 
 
-def validate_changelog(changelog: str):
+def validate_changelog(changelog: dict):
     if not changelog:
-        raise Exception("Empty changelog.")
-    if len(changelog) > DISCORD_EMBED_DESCRIPTION_LIMIT:
+        raise Exception("No changelog.")
+    if not changelog["author"]:
+        raise Exception("The changelog has no author.")
+    if len(changelog["changes"]) == 0:
+        raise Exception("No changes found in the changelog. Use special label if changelog is not expected.")
+    message = "\n".join(map(lambda change: f"{change['tag']} {change['message']}", changelog["changes"]))
+    if len(message) > DISCORD_EMBED_DESCRIPTION_LIMIT:
         raise Exception(f"The changelog exceeds the length limit ({DISCORD_EMBED_DESCRIPTION_LIMIT}). Shorten it.")
 
 
@@ -149,9 +154,10 @@ if not cl_required:
     exit(0)
 
 try:
-    write_cl = build_changelog(pr)
-    message = emojify_changelog(write_cl)
-    validate_changelog(message)
+    cl = build_changelog(pr)
+    cl_emoji = emojify_changelog(write_cl)
+    cl_emoji["author"] = cl_emoji["author"] or pr_author
+    validate_changelog(cl_emoji)
 except Exception as e:
     print("Changelog parsing error:")
     print(e)
