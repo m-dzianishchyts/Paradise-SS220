@@ -10,6 +10,7 @@ GITHUB_EVENT_PATH: path to JSON file containing the event info (Action provided)
 """
 import os
 import re
+import copy
 from pathlib import Path
 from ruamel.yaml import YAML
 from github import Github
@@ -145,7 +146,7 @@ if not cl_required:
         pr.remove_from_labels(CL_INVALID)
     if has_valid_label:
         pr.remove_from_labels(CL_VALID)
-    exit(1)
+    exit(0)
 
 try:
     write_cl = build_changelog(pr)
