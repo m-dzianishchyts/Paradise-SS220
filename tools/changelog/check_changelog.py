@@ -41,7 +41,7 @@ def parse_changelog(message: str) -> dict:
             raise Exception(f"Invalid change: '{cl_line}'")
         tag = change_parse_result["tag"]
         message = change_parse_result["message"]
-        if tag not in tags['tags'].keys():
+        if tag and tag not in tags['tags'].keys():
             raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tags['tags'].keys())}")
         if not message:
             raise Exception(f"No message for change: '{cl_line}'")
@@ -110,7 +110,8 @@ write_cl = {}
 try:
     write_cl = build_changelog(pr)
 except Exception as e:
-    print("CL parsing error: ", e)
+    print("CL parsing error")
+    print(e)
 
     if not cl_required:
         # remove invalid, remove valid
