@@ -9,6 +9,27 @@ on:
   merge_group:
 
 jobs:
+  merge-translate-into-master:
+    name: Merge translate into master
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Try to merge translate into master
+        id: merge_step
+        run: |
+          if git merge origin/translate; then
+            echo "Merge successful"
+          else
+            echo "Merge failed, continue with master"
+            git merge --abort || true
+            exit 1
+          fi
+        continue-on-error: true
+
   run_linters:
     name: Run Linters
     runs-on: ubuntu-22.04
