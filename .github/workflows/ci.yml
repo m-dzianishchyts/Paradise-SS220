@@ -9,6 +9,20 @@ on:
   merge_group:
 
 jobs:
+  merge-translate-into-master:
+    name: Merge Translate into Master
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Attempt to merge translate into master
+        run: |
+          git merge origin/translate --no-ff --no-commit || echo "Merge failed, continuing with master"
+        continue-on-error: true
+
   run_linters:
     name: Run Linters
     runs-on: ubuntu-22.04
