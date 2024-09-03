@@ -18,26 +18,17 @@ jobs:
         with:
           ref: master
 
-      - name: Checkout translate branch
-        uses: actions/checkout@v4
-        with:
-          ref: translate
-
-      - name: Attempt to merge translate into master
+      - name: Try to merge translate into master
         id: merge_step
         run: |
-          git merge translate --no-ff --no-commit || echo "Merge failed, continuing with master"
-        continue-on-error: true
-
-      - name: Check if merge was successful
-        id: merge_check
-        run: |
-          if ! git status | grep -q 'Changes to be committed'; then
-            echo "Merge was unsuccessful"
-            exit 1  # Explicitly fail this step
+          if git merge origin/translate; then
+            echo "Merge successful"
           else
-            echo "Merge was successful"
+            echo "Merge failed, continue with master"
+            git merge --abort || true
+            exit 1
           fi
+        continue-on-error: true
 
   run_linters:
     name: Run Linters
