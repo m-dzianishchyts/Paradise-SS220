@@ -9,6 +9,36 @@ on:
   merge_group:
 
 jobs:
+  merge-translate-into-master:
+    name: Merge translate into master
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout master branch
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Checkout translate branch
+        uses: actions/checkout@v4
+        with:
+          ref: translate
+
+      - name: Attempt to merge translate into master
+        id: merge_step
+        run: |
+          git merge translate --no-ff --no-commit || echo "Merge failed, continuing with master"
+        continue-on-error: true
+
+      - name: Check if merge was successful
+        id: merge_check
+        run: |
+          if ! git status | grep -q 'Changes to be committed'; then
+            echo "Merge was unsuccessful"
+            exit 1  # Explicitly fail this step
+          else
+            echo "Merge was successful"
+          fi
+
   run_linters:
     name: Run Linters
     runs-on: ubuntu-22.04
