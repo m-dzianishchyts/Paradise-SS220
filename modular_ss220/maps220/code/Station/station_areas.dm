@@ -90,7 +90,7 @@
 	request_console_name = "Medbay"
 
 /area/station/medical/virology
-	request_console_name = "Virology"
+	// request_console_name = "Virology" // hehe
 
 /area/station/medical/chemistry
 	request_console_name = "Chemistry"
