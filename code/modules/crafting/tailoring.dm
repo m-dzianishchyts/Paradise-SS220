@@ -10,7 +10,7 @@
 	result = list(/obj/item/clothing/suit/armor/vest/durathread)
 	reqs = list(/obj/item/stack/sheet/durathread = 5,
 				/obj/item/stack/sheet/leather = 4)
-	time = 5 SECONDS
+	time = 6 SECONDS
 	category = CAT_CLOTHING
 
 /datum/crafting_recipe/durathread_helmet
