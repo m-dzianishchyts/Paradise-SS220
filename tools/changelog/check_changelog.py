@@ -42,34 +42,33 @@ def load_yaml_config(path: str | Path) -> dict[str, dict[str, str]]:
         return yaml.load(file)
 
 
-def find_label(label_name: str, pr_labels: list[github.Label]):
-    return any(label.name == label_name for label in pr_labels)
+def add_label_safe(label_name: str, pr: github.PullRequest):
+    if not any(label.name == label_name for label in pr.labels):
+        pr.add_to_labels(label_name)
+
+
+def remove_label_safe(label_name: str, pr: github.PullRequest):
+    if any(label.name == label_name for label in pr.labels):
+        pr.remove_from_labels(label_name)
 
 
 def update_labels(pr: github.PullRequest, cl_required: bool = True, cl_valid: bool = None):
     """Update PR labels based on validation result."""
     if not cl_required:
-        if find_label(LABEL_CL_VALID, pr.labels):
-            pr.remove_from_labels(LABEL_CL_VALID)
-        if find_label(LABEL_CL_INVALID, pr.labels):
-            pr.remove_from_labels(LABEL_CL_INVALID)
-        if not find_label(LABEL_CL_NOT_NEEDED, pr.labels):
-            pr.add_to_labels(LABEL_CL_NOT_NEEDED)
+        remove_label_safe(LABEL_CL_VALID, pr)
+        remove_label_safe(LABEL_CL_INVALID, pr)
+        add_label_safe(LABEL_CL_NOT_NEEDED, pr)
         return
 
     if cl_valid is None:
         raise ChangelogException("Changelog is required but no validation result is provided.")
 
     if cl_valid:
-        if find_label(LABEL_CL_INVALID, pr.labels):
-            pr.remove_from_labels(LABEL_CL_INVALID)
-        if not find_label(LABEL_CL_VALID, pr.labels):
-            pr.add_to_labels(LABEL_CL_VALID)
+        remove_label_safe(LABEL_CL_INVALID, pr)
+        add_label_safe(LABEL_CL_VALID, pr)
     else:
-        if find_label(LABEL_CL_VALID, pr.labels):
-            pr.remove_from_labels(LABEL_CL_VALID)
-        if not find_label(LABEL_CL_INVALID, pr.labels):
-            pr.add_to_labels(LABEL_CL_INVALID)
+        remove_label_safe(LABEL_CL_VALID, pr)
+        add_label_safe(LABEL_CL_INVALID, pr)
 
 
 def validate_changelog(changelog: dict):
