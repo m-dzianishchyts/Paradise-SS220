@@ -529,7 +529,7 @@
 	},
 /area/syndicate_mothership/jail)
 "auk" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/pulse/destroyer/annihilator{
 	pixel_x = -6
 	},
@@ -603,7 +603,7 @@
 /turf/simulated/floor/indestructible/grass/no_creep,
 /area/centcom/ss220/admin1)
 "avX" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/gun/advtaser{
 	pixel_x = -6
 	},
@@ -721,7 +721,7 @@
 	},
 /area/centcom/ss220/bar)
 "azw" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/lwap,
 /obj/item/gun/energy/lwap{
 	pixel_x = 2
@@ -760,7 +760,7 @@
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership/infteam)
 "aAE" = (
-/obj/machinery/economy/vending/chinese,
+/obj/machinery/economy/vending/nt_food/free,
 /turf/simulated/floor/mineral/plastitanium,
 /area/centcom/ss220/general)
 "aBb" = (
@@ -1286,17 +1286,6 @@
 	water_overlay_image = null
 	},
 /area/syndicate_mothership/outside)
-"aRU" = (
-/obj/docking_port/stationary/transit{
-	dir = 8;
-	dwidth = 3;
-	height = 5;
-	id = "mining_transit";
-	name = "mining in transit";
-	width = 7
-	},
-/turf/space/transit,
-/area/space/centcomm)
 "aRZ" = (
 /obj/structure/light_fake/small{
 	dir = 8
@@ -1741,9 +1730,7 @@
 /turf/simulated/floor/indestructible/transparent_floor,
 /area/shuttle/syndicate)
 "bgR" = (
-/obj/structure/closet/crate/secure/bin{
-	color = "36373a"
-	},
+/obj/structure/closet/crate/secure/bin,
 /turf/simulated/floor/plasteel/dark{
 	icon_state = "darkyellowalt"
 	},
@@ -2109,7 +2096,7 @@
 /obj/effect/turf_decal/tile/neutral/full{
 	color = "#000000"
 	},
-/turf/simulated/floor/wood/fancy/cherry,
+/turf/simulated/floor/wood/parquet,
 /area/centcom/ss220/admin2)
 "bpw" = (
 /obj/machinery/computer/shuttle/syndicate{
@@ -2350,6 +2337,16 @@
 	icon_state = "rampbottom"
 	},
 /area/centcom/ss220/admin3)
+"bxM" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/effect/turf_decal/stripes/line{
+	dir = 1
+	},
+/obj/effect/turf_decal/caution,
+/turf/simulated/floor/mineral/titanium/blue,
+/area/shuttle/mining)
 "bxN" = (
 /obj/structure/chair/comfy/black,
 /turf/simulated/floor/carpet/green,
@@ -2360,6 +2357,19 @@
 	},
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/supply)
+"byg" = (
+/obj/machinery/flasher{
+	id = "gulagshuttleflasher";
+	pixel_x = 24
+	},
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/effect/turf_decal{
+	dir = 9
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "byz" = (
 /obj/effect/turf_decal/tile/neutral/full{
 	color = "#000000"
@@ -2714,7 +2724,7 @@
 	color = "#000000"
 	},
 /obj/effect/turf_decal/siding/wood/end,
-/obj/structure/rack/gunrack{
+/obj/structure/gunrack{
 	color = "grey"
 	},
 /obj/item/gun/projectile/shotgun/automatic/dual_tube,
@@ -3285,7 +3295,7 @@
 	},
 /obj/structure/light_fake/small,
 /obj/effect/turf_decal/delivery/white/hollow,
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /turf/simulated/floor/mineral/plastitanium,
 /area/syndicate_mothership/elite_squad)
 "bVX" = (
@@ -3429,6 +3439,16 @@
 	},
 /turf/simulated/floor/grass/no_creep,
 /area/centcom/ss220/admin2)
+"cbA" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/plasmareinforced{
+	dir = 1
+	},
+/obj/structure/window/plasmareinforced{
+	dir = 1
+	},
+/turf/simulated/floor/plating/lavaland_air,
+/area/shuttle/siberia)
 "cbK" = (
 /obj/machinery/computer/communications,
 /turf/simulated/floor/plasteel/dark,
@@ -3458,7 +3478,7 @@
 	},
 /area/shuttle/syndicate)
 "ccF" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/laser/instakill/blue{
 	pixel_x = -6
 	},
@@ -3485,6 +3505,10 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plasteel,
 /area/centcom/ss220/supply)
+"cdG" = (
+/obj/effect/spawner/window/shuttle,
+/turf/simulated/floor/plating,
+/area/shuttle/mining)
 "cdI" = (
 /obj/structure/light_fake{
 	dir = 8
@@ -3569,7 +3593,7 @@
 /turf/simulated/floor/grass/no_creep,
 /area/centcom/ss220/evac)
 "cgE" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/l6_saw{
 	pixel_x = -6
 	},
@@ -3706,6 +3730,13 @@
 	icon_state = "darkbrown"
 	},
 /area/centcom/ss220/admin3)
+"ckK" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/structure/extinguisher_cabinet/directional/south,
+/turf/simulated/floor/mineral/titanium/blue,
+/area/shuttle/mining)
 "ckX" = (
 /obj/structure/closet/secure_closet/guncabinet,
 /obj/machinery/light/spot{
@@ -3851,7 +3882,7 @@
 /turf/simulated/floor/indestructible/grass/no_creep,
 /area/centcom/ss220/admin1)
 "coe" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/gun,
 /obj/item/gun/energy/gun{
 	pixel_x = 2
@@ -3918,7 +3949,7 @@
 /area/centcom/ss220/admin1)
 "cqz" = (
 /obj/structure/table/glass/reinforced/plastitanium,
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /turf/simulated/floor/carpet/royalblack,
 /area/centcom/ss220/bar)
 "cqV" = (
@@ -4087,6 +4118,10 @@
 	},
 /turf/simulated/floor/mineral/plastitanium,
 /area/shuttle/syndicate)
+"cwF" = (
+/obj/structure/shuttle/engine/propulsion,
+/turf/simulated/floor/plating/lavaland_air,
+/area/shuttle/siberia)
 "cxe" = (
 /obj/effect/turf_decal/box/corners{
 	dir = 4
@@ -4712,7 +4747,7 @@
 "cXK" = (
 /obj/structure/lattice,
 /obj/effect/light_emitter/colored{
-	light_color = "#FFFFF";
+	light_color = "#FFFFFF";
 	light_power = 10;
 	light_range = 5
 	},
@@ -4775,7 +4810,7 @@
 "cYX" = (
 /obj/structure/marker_beacon/spotlight/jade,
 /obj/effect/light_emitter/colored{
-	light_color = "#FFFFF";
+	light_color = "#FFFFFF";
 	light_power = 10;
 	light_range = 5
 	},
@@ -4891,7 +4926,7 @@
 /area/shuttle/syndicate)
 "dbI" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /obj/effect/turf_decal/siding/white{
 	dir = 10
 	},
@@ -4975,7 +5010,7 @@
 	},
 /area/centcom/ss220/admin3)
 "ddt" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/clown,
 /obj/item/gun/energy/clown{
 	pixel_x = 2
@@ -5791,7 +5826,7 @@
 /turf/simulated/floor/wood/parquet/tile,
 /area/centcom/ss220/bar)
 "dBb" = (
-/obj/machinery/economy/vending/cigarette/free,
+/obj/machinery/economy/vending/nt_food/free,
 /turf/simulated/floor/plasteel/dark{
 	icon_state = "darkbluealt"
 	},
@@ -5855,7 +5890,7 @@
 	pixel_y = -3
 	},
 /obj/effect/turf_decal/delivery/white/hollow,
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /turf/simulated/floor/mineral/plastitanium,
 /area/syndicate_mothership/elite_squad)
 "dCq" = (
@@ -6272,8 +6307,19 @@
 	icon_state = "barber"
 	},
 /area/shuttle/administration)
+"dOf" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/obj/effect/turf_decal{
+	dir = 10
+	},
+/obj/machinery/light/directional/east,
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "dOx" = (
 /obj/structure/marker_beacon/spotlight/jade,
+/obj/structure/light_fake/spot,
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/command)
 "dON" = (
@@ -6738,7 +6784,7 @@
 /obj/structure/table/reinforced{
 	color = "#996633"
 	},
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/dessert,
 /turf/simulated/floor/plasteel/dark{
 	icon_state = "dark_large"
 	},
@@ -6915,7 +6961,7 @@
 /area/syndicate_mothership/jail)
 "emI" = (
 /obj/structure/table/wood/fancy/royalblue,
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /turf/simulated/floor/carpet/royalblack,
 /area/centcom/ss220/bar)
 "enl" = (
@@ -7189,6 +7235,15 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/jail)
+"eti" = (
+/obj/effect/turf_decal/stripes/red/corner{
+	dir = 1
+	},
+/obj/machinery/mineral/labor_prisoner_shuttle_console{
+	pixel_y = 32
+	},
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/siberia)
 "etr" = (
 /obj/structure/table,
 /obj/item/storage/fancy/cigarettes/dromedaryco{
@@ -7410,6 +7465,9 @@
 	},
 /turf/simulated/floor/carpet/black,
 /area/syndicate_mothership/control)
+"ezO" = (
+/turf/simulated/wall/mineral/titanium,
+/area/shuttle/mining)
 "ezR" = (
 /obj/structure/light_fake{
 	dir = 4
@@ -7701,7 +7759,7 @@
 /turf/simulated/floor/carpet/royalblue,
 /area/centcom/ss220/bar)
 "eIq" = (
-/obj/structure/rack/gunrack{
+/obj/structure/gunrack{
 	color = "grey"
 	},
 /obj/item/gun/projectile/automatic/gyropistol{
@@ -7844,6 +7902,19 @@
 /obj/item/food/limecakeslice,
 /turf/simulated/floor/mineral/plastitanium,
 /area/centcom/ss220/general)
+"eLp" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/plasmareinforced{
+	dir = 1
+	},
+/obj/structure/window/plasmareinforced{
+	dir = 4
+	},
+/obj/structure/window/plasmareinforced{
+	dir = 8
+	},
+/turf/simulated/floor/plating/lavaland_air,
+/area/shuttle/mining)
 "eLW" = (
 /obj/machinery/computer/operating{
 	dir = 8
@@ -8405,7 +8476,7 @@
 /turf/simulated/floor/carpet/royalblack,
 /area/syndicate_mothership/control)
 "fbR" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/m90,
 /obj/item/gun/projectile/automatic/m90{
 	pixel_x = 2
@@ -8474,7 +8545,7 @@
 /turf/simulated/floor/wood/fancy/cherry,
 /area/centcom/ss220/admin2)
 "fcF" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/ar{
 	pixel_x = -6
 	},
@@ -8947,7 +9018,7 @@
 /area/centcom/ss220/admin2)
 "fqN" = (
 /obj/structure/table/glass/reinforced/plastitanium,
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /obj/structure/light_fake,
 /obj/structure/sign/poster/official/random/south,
 /turf/simulated/floor/carpet/royalblack,
@@ -10154,7 +10225,7 @@
 /area/centcom/ss220/admin2)
 "gcj" = (
 /obj/effect/light_emitter/colored{
-	light_color = "#FFFFF";
+	light_color = "#FFFFFF";
 	light_power = 10;
 	light_range = 5
 	},
@@ -10853,6 +10924,16 @@
 	icon_state = "darkredcornersalt"
 	},
 /area/syndicate_mothership/jail)
+"gDx" = (
+/obj/effect/turf_decal/delivery/hollow,
+/obj/item/radio/intercom/directional/west,
+/obj/machinery/camera{
+	c_tag = "Mining Outpost - Shuttle";
+	dir = 5;
+	network = list("Mining Outpost")
+	},
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "gDW" = (
 /turf/simulated/floor/carpet/green,
 /area/centcom/ss220/general)
@@ -11198,6 +11279,12 @@
 	icon_state = "darkbrowncorners"
 	},
 /area/centcom/ss220/supply)
+"gNx" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 8
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "gNy" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/ashtray/bronze{
@@ -11234,6 +11321,26 @@
 	icon_state = "darkbrown"
 	},
 /area/syndicate_mothership/jail)
+"gOF" = (
+/obj/machinery/door/airlock/titanium{
+	id_tag = "s_docking_airlock"
+	},
+/obj/structure/fans/tiny,
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/docking_port/stationary/transit{
+	dir = 8;
+	dwidth = 2;
+	height = 5;
+	id = "laborcamp_transit";
+	name = "labor in transit";
+	width = 9;
+	pixel_x = 32
+	},
+/obj/docking_port/mobile/labour{
+	roundstart_move = "laborcamp_away"
+	},
+/turf/simulated/floor/plating,
+/area/shuttle/siberia)
 "gOQ" = (
 /turf/simulated/floor/plasteel{
 	icon_state = "darkneutralfull"
@@ -11241,7 +11348,7 @@
 /area/syndicate_mothership)
 "gPm" = (
 /obj/structure/table/wood/fancy/black,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/dessert,
 /turf/simulated/floor/carpet/black,
 /area/centcom/ss220/bar)
 "gPJ" = (
@@ -11675,7 +11782,7 @@
 	},
 /area/shuttle/escape)
 "hbp" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/shotgun/automatic/dual_tube,
 /obj/item/gun/projectile/shotgun/automatic/dual_tube{
 	pixel_x = 2
@@ -11757,7 +11864,7 @@
 /area/shuttle/syndicate)
 "hdk" = (
 /obj/structure/table/wood/poker,
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /turf/simulated/floor/carpet/green,
 /area/centcom/ss220/bar)
 "hdo" = (
@@ -11778,7 +11885,7 @@
 	},
 /obj/structure/light_fake/small,
 /obj/effect/turf_decal/delivery/white/hollow,
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /turf/simulated/floor/mineral/plastitanium,
 /area/syndicate_mothership/elite_squad)
 "hdx" = (
@@ -12102,6 +12209,15 @@
 /obj/machinery/economy/vending/wallmed/syndicate/directional/north,
 /turf/simulated/floor/carpet/black,
 /area/syndicate_mothership/infteam)
+"hoc" = (
+/obj/machinery/flasher_button{
+	id = "gulagshuttleflasher";
+	name = "Flash Control";
+	pixel_y = -24;
+	req_access_txt = "1"
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "hom" = (
 /obj/structure/light_fake{
 	dir = 4
@@ -12336,6 +12452,15 @@
 	icon_state = "dark_large"
 	},
 /area/centcom/ss220/command)
+"htc" = (
+/obj/machinery/door/airlock/titanium{
+	id_tag = "s_docking_airlock"
+	},
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/structure/fans/tiny,
+/obj/effect/mapping_helpers/airlock/autoname,
+/turf/simulated/floor/plating,
+/area/shuttle/siberia)
 "htl" = (
 /obj/machinery/computer/card/minor{
 	layer = 4
@@ -12649,9 +12774,7 @@
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/syndicate)
 "hFD" = (
-/obj/structure/closet/crate/secure/bin{
-	color = "36373a"
-	},
+/obj/structure/closet/crate/secure/bin,
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/admin3)
 "hFE" = (
@@ -13434,7 +13557,7 @@
 	},
 /area/centcom/ss220/medbay)
 "hXZ" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/proto,
 /obj/item/gun/projectile/automatic/proto{
 	pixel_x = 2
@@ -13602,6 +13725,20 @@
 	},
 /turf/simulated/floor/carpet,
 /area/centcom/ss220/general)
+"ieY" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/effect/turf_decal{
+	dir = 6
+	},
+/obj/machinery/camera{
+	c_tag = "Labor Camp Shuttle";
+	network = list("Labor Camp");
+	dir = 4
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "ifc" = (
 /obj/structure/light_fake/small{
 	dir = 1
@@ -13928,7 +14065,7 @@
 /turf/simulated/floor/wood/fancy/cherry,
 /area/centcom/ss220/admin2)
 "ipb" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/l6_saw,
 /obj/item/gun/projectile/automatic/l6_saw{
 	pixel_x = 2
@@ -14073,7 +14210,7 @@
 /obj/structure/table/wood{
 	color = "#996633"
 	},
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /turf/simulated/floor/carpet/lone,
 /area/centcom/ss220/bar)
 "irK" = (
@@ -14119,7 +14256,7 @@
 /turf/simulated/floor/carpet/royalblack,
 /area/centcom/ss220/admin2)
 "isq" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/m90{
 	pixel_x = -6
 	},
@@ -14379,6 +14516,10 @@
 	},
 /turf/simulated/floor/wood/parquet/tile,
 /area/centcom/ss220/admin1)
+"iwt" = (
+/obj/effect/baseturf_helper/lava_land,
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "iwE" = (
 /obj/machinery/computer/nonfunctional,
 /turf/simulated/floor/plasteel{
@@ -14933,7 +15074,7 @@
 /turf/simulated/floor/mineral/titanium,
 /area/shuttle/syndicate)
 "iRb" = (
-/obj/machinery/economy/vending/chinese/free,
+/obj/machinery/economy/vending/nt_food/free,
 /obj/structure/sign/poster/official/high_class_martini{
 	pixel_y = 32
 	},
@@ -14998,7 +15139,7 @@
 /area/syndicate_mothership/jail)
 "iUn" = (
 /obj/effect/decal/cleanable/dust,
-/obj/effect/spawner/lootdrop/trash,
+/obj/effect/spawner/random/trash,
 /turf/simulated/floor/plating,
 /area/centcom/ss220/supply)
 "iUu" = (
@@ -16015,7 +16156,7 @@
 /obj/effect/turf_decal/siding/wood/end{
 	dir = 1
 	},
-/obj/structure/rack/gunrack{
+/obj/structure/gunrack{
 	color = "grey"
 	},
 /obj/item/gun/energy/pulse/destroyer/annihilator,
@@ -16599,8 +16740,8 @@
 "jXb" = (
 /obj/structure/light_fake/spot,
 /obj/structure/closet/crate/secure/bin{
-	anchored = 1;
-	color = "#996633"
+	color = "#36373a";
+	anchored = 1
 	},
 /turf/simulated/floor/plasteel/dark{
 	dir = 6;
@@ -16737,7 +16878,7 @@
 /area/centcom/ss220/supply)
 "kdg" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/dessert,
 /obj/effect/turf_decal/siding/white{
 	dir = 10
 	},
@@ -17343,7 +17484,7 @@
 /turf/simulated/floor/wood/fancy/cherry,
 /area/centcom/ss220/admin2)
 "kwP" = (
-/obj/machinery/economy/vending/chinese/free,
+/obj/machinery/economy/vending/cigarette/free,
 /turf/simulated/floor/plasteel/dark{
 	dir = 6;
 	icon_state = "darkbluealt"
@@ -17552,6 +17693,9 @@
 	icon_state = "darkyellowalt"
 	},
 /area/syndicate_mothership/cargo)
+"kDv" = (
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "kDx" = (
 /obj/machinery/door/airlock/titanium{
 	id_tag = "s_docking_airlock"
@@ -17626,7 +17770,7 @@
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/admin3)
 "kED" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/gun/blueshield/pdw9{
 	pixel_x = -6
 	},
@@ -17644,6 +17788,13 @@
 /obj/structure/table/wood,
 /turf/simulated/floor/wood/oak,
 /area/centcom/ss220/park)
+"kEM" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/plasmareinforced{
+	dir = 1
+	},
+/turf/simulated/floor/plating/lavaland_air,
+/area/shuttle/siberia)
 "kEN" = (
 /obj/structure/flora/ausbushes/sparsegrass,
 /obj/structure/flora/ausbushes/ppflowers,
@@ -18054,7 +18205,7 @@
 /area/centcom/ss220/evac)
 "kMD" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
@@ -18147,7 +18298,7 @@
 "kQG" = (
 /obj/structure/marker_beacon/spotlight/jade,
 /obj/effect/light_emitter/colored{
-	light_color = "#FFFFF";
+	light_color = "#FFFFFF";
 	light_power = 10;
 	light_range = 5
 	},
@@ -18195,7 +18346,7 @@
 	},
 /obj/structure/table/wood/fancy/purple,
 /obj/structure/sign/poster/official/random/north,
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/bar)
 "kRo" = (
@@ -18530,6 +18681,20 @@
 	icon_state = "darkredaltstrip"
 	},
 /area/syndicate_mothership/jail)
+"lbh" = (
+/obj/structure/table,
+/obj/item/folder/red,
+/obj/item/restraints/handcuffs,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/flasher_button{
+	id = "gulagshuttleflasher";
+	name = "Flash Control";
+	req_access_txt = "1"
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "lbm" = (
 /obj/structure/chair/comfy/brown,
 /obj/effect/landmark/spawner/aroomwarp,
@@ -18798,7 +18963,7 @@
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/court)
 "ljX" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/disabler{
 	pixel_x = -6
 	},
@@ -18930,6 +19095,11 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/jail)
+"loY" = (
+/obj/effect/turf_decal/delivery/hollow,
+/obj/machinery/light/small/directional/west,
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "lpw" = (
 /obj/structure/flora/ausbushes/brflowers,
 /obj/effect/spawner/window,
@@ -19459,6 +19629,9 @@
 "lAC" = (
 /turf/simulated/floor/indestructible/grass/no_creep,
 /area/syndicate_mothership/outside)
+"lAX" = (
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "lAY" = (
 /obj/structure/chair/comfy/shuttle{
 	dir = 1
@@ -19741,7 +19914,7 @@
 /obj/item/ammo_box/magazine/m556,
 /obj/item/ammo_box/magazine/m556,
 /obj/effect/turf_decal/delivery/white/hollow,
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /turf/simulated/floor/mineral/plastitanium,
 /area/syndicate_mothership/elite_squad)
 "lLq" = (
@@ -20283,6 +20456,13 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership)
+"mbV" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/light/directional/south,
+/turf/simulated/floor/mineral/titanium/blue,
+/area/shuttle/mining)
 "mcm" = (
 /obj/structure/closet/crate/secure/bin{
 	color = "#36373a";
@@ -20803,7 +20983,7 @@
 /area/space/centcomm)
 "mqA" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/spawner/lootdrop/trash,
+/obj/effect/spawner/random/trash,
 /turf/simulated/floor/plating,
 /area/centcom/ss220/supply)
 "mqM" = (
@@ -21854,7 +22034,7 @@
 /turf/simulated/floor/indestructible/grass,
 /area/syndicate_mothership/outside)
 "ndz" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/gun/nuclear{
 	pixel_x = -6
 	},
@@ -21894,7 +22074,7 @@
 /obj/item/ammo_casing/rocket,
 /obj/item/ammo_casing/rocket,
 /obj/effect/turf_decal/delivery/white,
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /turf/simulated/floor/plasteel{
 	icon_state = "darkyellowfull"
 	},
@@ -22257,14 +22437,14 @@
 /area/centcom/ss220/admin1)
 "noT" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/dessert,
 /obj/effect/turf_decal/siding/white{
 	dir = 6
 	},
 /turf/simulated/floor/fakespace,
 /area/centcom/ss220/bar)
 "npf" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/immolator,
 /obj/item/gun/energy/immolator{
 	pixel_x = 2
@@ -22300,7 +22480,7 @@
 /turf/simulated/floor/mineral/plastitanium,
 /area/syndicate_mothership)
 "npI" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/lwap{
 	pixel_x = -6
 	},
@@ -22462,6 +22642,10 @@
 	},
 /turf/simulated/floor/mineral/plastitanium,
 /area/syndicate_mothership/infteam)
+"nvs" = (
+/obj/structure/shuttle/engine/propulsion/burst,
+/turf/simulated/floor/plating/lavaland_air,
+/area/shuttle/mining)
 "nvF" = (
 /turf/simulated/floor/plasteel/dark{
 	icon_state = "darkbluealtstrip"
@@ -22580,7 +22764,7 @@
 	},
 /area/centcom/ss220/evac)
 "nzJ" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/disabler/smg,
 /obj/item/gun/energy/disabler/smg{
 	pixel_x = 2
@@ -22713,6 +22897,16 @@
 	icon_state = "darkredalt"
 	},
 /area/centcom/ss220/jail)
+"nEQ" = (
+/obj/effect/light_emitter/colored{
+	light_color = "#FFFFFF";
+	light_power = 10;
+	light_range = 5
+	},
+/turf/simulated/floor/plasteel/dark{
+	icon_state = "dark_large"
+	},
+/area/centcom/ss220/command)
 "nEU" = (
 /obj/structure/sink/directional/west,
 /turf/simulated/floor/carpet/black,
@@ -23291,7 +23485,7 @@
 /turf/simulated/floor/carpet/black,
 /area/syndicate_mothership/jail)
 "nVy" = (
-/obj/machinery/economy/vending/snack/free,
+/obj/machinery/economy/vending/nt_food/free,
 /obj/structure/light_fake/spot{
 	dir = 8
 	},
@@ -23315,7 +23509,7 @@
 "nWa" = (
 /obj/structure/marker_beacon/spotlight/jade,
 /obj/effect/light_emitter/colored{
-	light_color = "#FFFFF";
+	light_color = "#FFFFFF";
 	light_power = 10;
 	light_range = 5
 	},
@@ -23700,7 +23894,9 @@
 	},
 /obj/effect/turf_decal/stripes/red/box,
 /obj/effect/light_emitter/colored{
-	light_color = "white"
+	light_color = "#FFFFFF";
+	light_power = 10;
+	light_range = 5
 	},
 /turf/simulated/floor/plasteel/dark{
 	dir = 8;
@@ -23981,7 +24177,7 @@
 	},
 /area/syndicate_mothership/cargo)
 "ouD" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/lasercannon,
 /obj/item/gun/energy/lasercannon{
 	pixel_x = 2
@@ -24052,6 +24248,10 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/jail)
+"owk" = (
+/obj/effect/baseturf_helper/asteroid/basalt,
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/siberia)
 "own" = (
 /obj/structure/table/reinforced,
 /obj/structure/window/reinforced,
@@ -24428,7 +24628,7 @@
 	},
 /area/syndicate_mothership/cargo)
 "oGQ" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/xray,
 /obj/item/gun/energy/xray{
 	pixel_x = 2
@@ -24917,7 +25117,7 @@
 /area/centcom/ss220/admin2)
 "oWk" = (
 /obj/structure/table/glass/reinforced/plastitanium,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /obj/structure/light_fake{
 	dir = 1
 	},
@@ -25165,7 +25365,7 @@
 /obj/effect/turf_decal/tile/neutral/full{
 	color = "#000000"
 	},
-/turf/simulated/floor/wood/fancy/cherry,
+/turf/simulated/floor/wood/parquet,
 /area/centcom/ss220/admin2)
 "pcg" = (
 /obj/structure/chair/sofa,
@@ -27319,7 +27519,7 @@
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership/control)
 "qyB" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/ak814,
 /obj/item/gun/projectile/automatic/ak814{
 	pixel_x = 2
@@ -28431,7 +28631,7 @@
 /area/syndicate_mothership/control)
 "rgd" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/dessert,
 /obj/effect/turf_decal/siding/white{
 	dir = 9
 	},
@@ -28807,8 +29007,8 @@
 	},
 /area/syndicate_mothership/cargo)
 "rqA" = (
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/dessert,
 /obj/structure/table/wood/fancy/blue,
 /turf/simulated/floor/carpet/royalblue,
 /area/centcom/ss220/bar)
@@ -29244,7 +29444,7 @@
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership/control)
 "rxI" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/gun/advtaser,
 /obj/item/gun/energy/gun/advtaser{
 	pixel_x = 2
@@ -30102,7 +30302,7 @@
 /area/syndicate_mothership/elite_squad)
 "rXJ" = (
 /obj/structure/closet/crate/trashcart,
-/obj/effect/spawner/lootdrop/trash,
+/obj/effect/spawner/random/trash,
 /obj/effect/decal/cleanable/dust,
 /turf/simulated/floor/plating,
 /area/centcom/ss220/supply)
@@ -30843,6 +31043,19 @@
 	icon_state = "darkbluecornersalt"
 	},
 /area/centcom/ss220/admin3)
+"stf" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 4
+	},
+/obj/effect/turf_decal{
+	dir = 5
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
+"sto" = (
+/obj/machinery/computer/shuttle/mining,
+/turf/simulated/floor/mineral/titanium/blue,
+/area/shuttle/mining)
 "stR" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Конференц Зал";
@@ -31237,7 +31450,7 @@
 	},
 /area/syndicate_mothership/jail)
 "sJw" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/disabler/silencer,
 /obj/item/gun/energy/disabler/silencer{
 	pixel_x = 2
@@ -31375,7 +31588,7 @@
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/admin1)
 "sLm" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/pulse,
 /obj/item/gun/energy/pulse{
 	pixel_x = 2
@@ -31854,7 +32067,7 @@
 	},
 /area/syndicate_mothership)
 "sZo" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/laser,
 /obj/item/gun/energy/laser{
 	pixel_x = 2
@@ -31888,8 +32101,8 @@
 /turf/simulated/floor/indestructible/grass/no_creep,
 /area/centcom/ss220/admin1)
 "sZB" = (
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/dessert,
 /obj/structure/table/wood/fancy/red,
 /turf/simulated/floor/carpet/red,
 /area/centcom/ss220/bar)
@@ -32124,7 +32337,7 @@
 	},
 /area/syndicate_mothership/elite_squad)
 "tiF" = (
-/obj/machinery/economy/vending/snack/free,
+/obj/machinery/economy/vending/nt_food/free,
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/admin3)
 "tjz" = (
@@ -32213,7 +32426,7 @@
 /area/centcom/ss220/admin3)
 "tnw" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/desert,
+/obj/effect/spawner/random/CCfood/dessert,
 /obj/effect/turf_decal/siding/white{
 	dir = 5
 	},
@@ -32365,7 +32578,7 @@
 /area/shuttle/administration)
 "trV" = (
 /obj/structure/closet/crate/trashcart,
-/obj/effect/spawner/lootdrop/trash,
+/obj/effect/spawner/random/trash,
 /turf/simulated/floor/plating,
 /area/centcom/ss220/supply)
 "tsb" = (
@@ -32920,6 +33133,9 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/simulated/floor/indestructible/grass,
 /area/syndicate_mothership/outside)
+"tIw" = (
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/siberia)
 "tIy" = (
 /obj/structure/chair/stool{
 	dir = 8
@@ -33534,7 +33750,7 @@
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership/infteam)
 "ubR" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/energy/pulse/pistol/m1911{
 	pixel_x = -6
 	},
@@ -34381,7 +34597,7 @@
 /area/shuttle/syndicate)
 "uGb" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /obj/effect/turf_decal/siding/white{
 	dir = 5
 	},
@@ -34928,6 +35144,12 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/jail)
+"uXQ" = (
+/obj/machinery/computer/shuttle/labor{
+	dir = 4
+	},
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "uXT" = (
 /obj/structure/light_fake/small,
 /obj/effect/decal/cleanable/dirt,
@@ -35131,6 +35353,12 @@
 	},
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership)
+"vfi" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "vfs" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -35568,6 +35796,10 @@
 	},
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/court)
+"vqY" = (
+/obj/effect/spawner/window/shuttle,
+/turf/simulated/floor/plating,
+/area/shuttle/siberia)
 "vrd" = (
 /obj/structure/flora/tree/jungle,
 /turf/simulated/floor/indestructible/grass/no_creep,
@@ -35641,7 +35873,7 @@
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/evac)
 "vsJ" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/ar,
 /obj/item/gun/projectile/automatic/ar{
 	pixel_x = 2
@@ -36152,6 +36384,11 @@
 "vCF" = (
 /turf/simulated/wall/indestructible/fakeglass,
 /area/centcom/ss220/park)
+"vCJ" = (
+/obj/machinery/light/small/directional/east,
+/obj/effect/turf_decal/delivery,
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/mining)
 "vCS" = (
 /turf/simulated/floor/mineral/plastitanium/red,
 /area/shuttle/assault_pod)
@@ -36364,7 +36601,9 @@
 	},
 /obj/effect/turf_decal/stripes/red/box,
 /obj/effect/light_emitter/colored{
-	light_color = "white"
+	light_color = "#FFFFFF";
+	light_power = 10;
+	light_range = 5
 	},
 /turf/simulated/floor/plasteel/dark{
 	dir = 8;
@@ -36858,7 +37097,7 @@
 /area/centcom/ss220/park)
 "wbm" = (
 /obj/structure/table/wood/fancy/black,
-/obj/effect/spawner/lootdrop/CCfood/alcohol,
+/obj/effect/spawner/random/CCfood/alcohol,
 /turf/simulated/floor/carpet/black,
 /area/centcom/ss220/bar)
 "wbu" = (
@@ -37325,6 +37564,12 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/cargo)
+"wmt" = (
+/obj/effect/turf_decal/stripes/red/line{
+	dir = 1
+	},
+/turf/simulated/floor/mineral/titanium,
+/area/shuttle/siberia)
 "wmB" = (
 /obj/structure/table/glass/reinforced/titanium{
 	color = "#dbc921";
@@ -37993,6 +38238,27 @@
 	},
 /turf/simulated/floor/wood/fancy/cherry,
 /area/centcom/ss220/bar)
+"wDK" = (
+/obj/machinery/door/airlock/titanium{
+	id_tag = "s_docking_airlock"
+	},
+/obj/effect/mapping_helpers/airlock/autoname,
+/obj/structure/fans/tiny,
+/obj/effect/mapping_helpers/airlock/access/any/supply/mining,
+/obj/docking_port/stationary/transit{
+	dir = 8;
+	dwidth = 3;
+	height = 5;
+	id = "mining_transit";
+	name = "mining in transit";
+	width = 7;
+	pixel_x = 32
+	},
+/obj/docking_port/mobile/mining{
+	roundstart_move = "mining_away"
+	},
+/turf/simulated/floor/plating,
+/area/shuttle/mining)
 "wDR" = (
 /turf/simulated/floor/plasteel/dark{
 	icon_state = "darkgreen"
@@ -38253,6 +38519,12 @@
 	icon_state = "dark"
 	},
 /area/syndicate_mothership/cargo)
+"wMc" = (
+/obj/machinery/door/airlock/titanium,
+/obj/effect/mapping_helpers/airlock/access/all/security/brig,
+/obj/effect/mapping_helpers/airlock/autoname,
+/turf/simulated/floor/mineral/plastitanium/red,
+/area/shuttle/siberia)
 "wMx" = (
 /turf/simulated/floor/plasteel/dark{
 	dir = 5;
@@ -38526,7 +38798,7 @@
 /area/centcom/ss220/general)
 "wTV" = (
 /obj/structure/table/abductor,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /obj/effect/turf_decal/siding/white{
 	dir = 6
 	},
@@ -38650,17 +38922,6 @@
 	},
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership)
-"xau" = (
-/obj/docking_port/stationary/transit{
-	dir = 8;
-	dwidth = 2;
-	height = 5;
-	id = "laborcamp_transit";
-	name = "labor in transit";
-	width = 9
-	},
-/turf/space/transit,
-/area/space/centcomm)
 "xaH" = (
 /obj/effect/decal/nanotrasen_logo_circle{
 	icon_state = "ntlogo_sec";
@@ -38922,7 +39183,7 @@
 /turf/simulated/floor/plasteel/dark,
 /area/centcom/ss220/supply)
 "xfK" = (
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /obj/item/gun/projectile/automatic/sniper_rifle{
 	pixel_x = -6
 	},
@@ -39054,7 +39315,7 @@
 /area/shuttle/syndicate)
 "xjz" = (
 /obj/structure/table/wood/fancy/royalblue,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /turf/simulated/floor/carpet/royalblack,
 /area/centcom/ss220/bar)
 "xjE" = (
@@ -39366,7 +39627,7 @@
 /obj/structure/light_fake{
 	dir = 1
 	},
-/obj/structure/rack/gunrack,
+/obj/structure/gunrack,
 /turf/simulated/floor/wood/oak,
 /area/syndicate_mothership/control)
 "xqG" = (
@@ -39754,7 +40015,7 @@
 /area/centcom/ss220/bar)
 "xEu" = (
 /obj/structure/table/glass/reinforced/plastitanium,
-/obj/effect/spawner/lootdrop/CCfood/meat,
+/obj/effect/spawner/random/CCfood/meat,
 /turf/simulated/floor/carpet/royalblack,
 /area/centcom/ss220/bar)
 "xEG" = (
@@ -40029,6 +40290,13 @@
 	icon_state = "darkbrown"
 	},
 /area/centcom/ss220/supply)
+"xLm" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/structure/sign/poster/official/random/south,
+/turf/simulated/floor/mineral/titanium/blue,
+/area/shuttle/mining)
 "xLG" = (
 /obj/structure/flora/ausbushes,
 /turf/simulated/floor/indestructible/grass/no_creep,
@@ -40406,6 +40674,9 @@
 /obj/structure/table/wood/fancy/red,
 /turf/simulated/floor/carpet/red,
 /area/centcom/ss220/bar)
+"xZs" = (
+/turf/simulated/wall/mineral/titanium,
+/area/shuttle/siberia)
 "xZz" = (
 /obj/machinery/door/airlock/external{
 	id_tag = "s_docking_airlock";
@@ -58941,7 +59212,7 @@ siO
 xwO
 shq
 rmd
-shq
+nEQ
 shq
 shq
 shq
@@ -79061,12 +79332,12 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+ezO
+cdG
+ezO
+cdG
+eLp
+nvs
 lgH
 lgH
 lgH
@@ -79317,13 +79588,13 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+ezO
+ezO
+loY
+gDx
+bxM
+xLm
+ezO
 lgH
 lgH
 lgH
@@ -79574,13 +79845,13 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+cdG
+sto
+vfi
+iwt
+bxM
+mbV
+ezO
 lgH
 lgH
 lgH
@@ -79831,13 +80102,13 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+ezO
+ezO
+vCJ
+kDv
+bxM
+ckK
+ezO
 lgH
 lgH
 lgH
@@ -80089,12 +80360,12 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+ezO
+cdG
+wDK
+cdG
+eLp
+nvs
 lgH
 lgH
 lgH
@@ -80348,7 +80619,7 @@ lgH
 lgH
 lgH
 lgH
-aRU
+lgH
 lgH
 lgH
 lgH
@@ -85998,15 +86269,15 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+xZs
+xZs
+vqY
+xZs
+xZs
+vqY
+xZs
+xZs
+xZs
 lgH
 lgH
 lgH
@@ -86255,15 +86526,15 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+vqY
+uXQ
+lAX
+wMc
+wmt
+stf
+ieY
+kEM
+cwF
 lgH
 lgH
 lgH
@@ -86512,15 +86783,15 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+vqY
+gNx
+lAX
+xZs
+eti
+owk
+tIw
+cbA
+cwF
 lgH
 lgH
 lgH
@@ -86769,15 +87040,15 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+vqY
+lbh
+hoc
+xZs
+byg
+dOf
+tIw
+kEM
+cwF
 lgH
 lgH
 lgH
@@ -87026,15 +87297,15 @@ lgH
 lgH
 lgH
 lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
-lgH
+xZs
+xZs
+htc
+xZs
+xZs
+xZs
+gOF
+xZs
+xZs
 lgH
 lgH
 lgH
@@ -87289,7 +87560,7 @@ lgH
 lgH
 lgH
 lgH
-xau
+lgH
 lgH
 lgH
 lgH

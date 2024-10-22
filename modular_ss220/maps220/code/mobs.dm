@@ -229,7 +229,7 @@
 	icon_dead = "voxmeleedead"
 	melee_damage_lower = 15
 	melee_damage_upper = 15
-	loot = list(/obj/effect/spawner/lootdrop/maintenance/three = 1)
+	loot = list(/obj/effect/spawner/random/maintenance = 1)
 	attacktext = "slash"
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	status_flags = 0
@@ -247,7 +247,7 @@
 	minimum_distance = 5
 	casingtype = /obj/item/ammo_casing/c45
 	projectilesound = 'sound/weapons/gunshots/gunshot_strong.ogg'
-	loot = list(/obj/effect/spawner/lootdrop/maintenance/three = 1)
+	loot = list(/obj/effect/spawner/random/maintenance = 1)
 
 /mob/living/simple_animal/hostile/vox/ranged_laser
 	name = "Vox Laser Gunman"
@@ -274,7 +274,7 @@
 	atmos_requirements = list("min_oxy" = 0, "max_oxy" = 0, "min_tox" = 0, "max_tox" = 0, "min_co2" = 0, "max_co2" = 0, "min_n2" = 0, "max_n2" = 0)
 	wander = FALSE
 	minbodytemp = 0
-	loot = list(/obj/effect/spawner/lootdrop/maintenance/three = 1)
+	loot = list(/obj/effect/spawner/random/maintenance = 1)
 
 /* Jungle Mob */
 /mob/living/simple_animal/hostile/jungle_lizard
@@ -566,7 +566,7 @@
 	melee_damage_upper = 25
 	attacktext = "моргает на"
 	attack_sound = 'sound/weapons/pierce.ogg'
-	flying = TRUE
+	initial_traits = list(TRAIT_FLYING)
 
 	faction = list("spooky")
 	del_on_death = TRUE
@@ -1092,7 +1092,7 @@
 	status_flags = NONE
 	wander = TRUE
 	loot = list(/obj/effect/gibspawner/xeno, /obj/item/stack/ore/bluespace_crystal/refined = 30, /obj/item/card/id/xen_key, /obj/item/gun/energy/wormhole_projector)
-	flying = TRUE
+	initial_traits = list(TRAIT_FLYING)
 	death_sound = 'modular_ss220/aesthetics_sounds/sound/mobs/nihilanth/nihilanth_pain01.ogg'
 
 /obj/item/card/id/xen_key
