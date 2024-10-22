@@ -15,7 +15,7 @@ jobs:
     if: github.base_ref == 'master' && github.event.pull_request.draft == false
     steps:
       - name: Downloading scripts
-        uses: uses: actions/checkout@v4
+        uses: actions/checkout@v4
         with:
           sparse-checkout: 'tools/changelog'
 
