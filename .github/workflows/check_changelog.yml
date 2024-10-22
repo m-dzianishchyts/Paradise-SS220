@@ -32,4 +32,5 @@ jobs:
       - name: Changelog validation
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          BOT_ID: 150192887
         run: cd tools/changelog && python check_changelog.py

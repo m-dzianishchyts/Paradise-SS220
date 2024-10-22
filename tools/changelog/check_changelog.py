@@ -15,6 +15,7 @@ import json
 import github
 import github.PullRequest
 import github.Label
+import github.IssueEvent
 
 from pathlib import Path
 from ruamel.yaml import YAML
@@ -40,6 +41,16 @@ def load_yaml_config(path: str | Path) -> dict[str, dict[str, str]]:
     with open(path, 'r') as file:
         yaml = YAML(typ='safe', pure=True)
         return yaml.load(file)
+
+
+def is_label_set_manually(label_name: str, pr_events: list[github.IssueEvent], bot_id: int):
+    """Find latest event for the label and make sure it wasn't set by the bot."""
+    events_labeled = list(event for event in pr_events if event.event == "labeled" and event.label.name == label_name)
+    events_sorted = sorted(events_labeled, key=lambda event: event.created_at, reverse=True)
+    if len(events_sorted):
+        raise Exception(f"No event found related to label '{label_name}'")
+
+    return events_sorted[0].actor.id != bot_id
 
 
 def add_label_safe(label_name: str, pr: github.PullRequest):
@@ -78,7 +89,8 @@ def validate_changelog(changelog: dict):
     if not changelog["author"]:
         raise ChangelogException("The changelog has no author.")
     if len(changelog["changes"]) == 0:
-        raise ChangelogException("No changes found in the changelog. Use special label or NPFC if changelog is not expected.")
+        raise ChangelogException("No changes found in the changelog. "
+                                 "Use special label or NPFC if changelog is not expected.")
 
     message = "\n".join(map(lambda change: f"{change['tag']} {change['message']}", changelog["changes"]))
     if len(message) > DISCORD_EMBED_DESCRIPTION_LIMIT:
@@ -161,13 +173,10 @@ def process_pull_request(pr: github.PullRequest, tags_config: dict[str, dict[str
 
 
 def main():
-    repo_name = os.getenv("GITHUB_REPOSITORY")
-    token = os.getenv("BOT_TOKEN")
-    event_path = os.getenv("GITHUB_EVENT_PATH")
-
-    if not token:
-        print("BOT_TOKEN was not provided.")
-        exit(1)
+    repo_name = os.environ["GITHUB_REPOSITORY"]
+    event_path = os.environ["GITHUB_EVENT_PATH"]
+    token = os.environ["BOT_TOKEN"]
+    bot_id = int(os.environ["BOT_ID"])
 
     with open(event_path, 'r') as f:
         event_data = json.load(f)
@@ -176,18 +185,22 @@ def main():
     repo = git.get_repo(repo_name)
     pr = repo.get_pull(event_data['number'])
     pr_is_mirror = pr.title.startswith("[MIRROR]")
+    pr_has_npfc = "NPFC".casefold() in pr.body.casefold()
+    pr_has_manual_label = any(label.name == LABEL_CL_NOT_NEEDED for label in pr.labels) \
+                          and is_label_set_manually(LABEL_CL_NOT_NEEDED, list(pr.get_issue_events()), bot_id)
 
     cl_required = True
+    pr.get_issue_events()
     if pr_is_mirror:
         print("PR is a mirror PR - changelog not needed.")
         cl_required = False
 
-    if any(label.name == LABEL_CL_NOT_NEEDED for label in pr.labels):
-        print("PR is marked as not requiring a changelog (label).")
+    if pr_has_npfc:
+        print("PR is marked as not requiring a changelog (NPFC).")
         cl_required = False
 
-    if "NPFC".casefold() in pr.body.casefold():
-        print("PR is marked as not requiring a changelog (NPFC).")
+    if pr_has_manual_label:
+        print("PR is marked as not requiring a changelog (label).")
         cl_required = False
 
     if not cl_required:
