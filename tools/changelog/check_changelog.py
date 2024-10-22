@@ -155,6 +155,10 @@ def main():
     token = os.getenv("BOT_TOKEN")
     event_path = os.getenv("GITHUB_EVENT_PATH")
 
+    if not token:
+        print("BOT_TOKEN was not provided.")
+        return
+
     with open(event_path, 'r') as f:
         event_data = json.load(f)
 
