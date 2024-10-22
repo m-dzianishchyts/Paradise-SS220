@@ -31,6 +31,10 @@ LABEL_CL_VALID = ":scroll: CL валиден"
 LABEL_CL_NOT_NEEDED = ":scroll: CL не требуется"
 
 
+class ChangelogException(Exception):
+    pass
+
+
 def load_yaml_config(path: str | Path) -> dict[str, dict[str, str]]:
     """Load YAML configuration from a file."""
     with open(path, 'r') as file:
@@ -54,7 +58,7 @@ def update_labels(pr: github.PullRequest, cl_required: bool = True, cl_valid: bo
         return
 
     if cl_valid is None:
-        raise Exception("Changelog is required but no validation result is provided.")
+        raise ChangelogException("Changelog is required but no validation result is provided.")
 
     if cl_valid:
         if find_label(LABEL_CL_INVALID, pr.labels):
@@ -71,15 +75,15 @@ def update_labels(pr: github.PullRequest, cl_required: bool = True, cl_valid: bo
 def validate_changelog(changelog: dict):
     """Validate the parsed changelog."""
     if not changelog:
-        raise Exception("No changelog.")
+        raise ChangelogException("No changelog.")
     if not changelog["author"]:
-        raise Exception("The changelog has no author.")
+        raise ChangelogException("The changelog has no author.")
     if len(changelog["changes"]) == 0:
-        raise Exception("No changes found in the changelog. Use special label or NPFC if changelog is not expected.")
+        raise ChangelogException("No changes found in the changelog. Use special label or NPFC if changelog is not expected.")
 
     message = "\n".join(map(lambda change: f"{change['tag']} {change['message']}", changelog["changes"]))
     if len(message) > DISCORD_EMBED_DESCRIPTION_LIMIT:
-        raise Exception(f"The changelog exceeds the length limit ({DISCORD_EMBED_DESCRIPTION_LIMIT}). Shorten it.")
+        raise ChangelogException(f"The changelog exceeds the length limit ({DISCORD_EMBED_DESCRIPTION_LIMIT}).")
 
 
 def emojify_changelog(changelog: dict, tags_config: dict):
@@ -90,7 +94,7 @@ def emojify_changelog(changelog: dict, tags_config: dict):
         if change["tag"] in discord_tags:
             change["tag"] = discord_tags[change["tag"]]
         else:
-            raise Exception(f"Invalid tag for emoji: {change}")
+            raise ChangelogException(f"Invalid tag for emoji: {change}")
     return changelog_copy
 
 
@@ -100,23 +104,23 @@ def parse_changelog(message: str, tags_config: dict[str, dict[str, str]]) -> dic
 
     cl_parse_result = CL_BODY_PATTERN.search(message)
     if cl_parse_result is None:
-        raise Exception("Failed to parse the changelog. Check changelog format.")
+        raise ChangelogException("Failed to parse the changelog. Check changelog format.")
     cl_changes = []
     for cl_line in cl_parse_result.group("content").splitlines():
         if not cl_line:
             continue
         change_parse_result = CL_SPLIT_PATTERN.search(cl_line)
         if not change_parse_result:
-            raise Exception(f"Invalid change: '{cl_line}'")
+            raise ChangelogException(f"Invalid change: '{cl_line}'")
 
         tag, message = change_parse_result["tag"], change_parse_result["message"]
 
         if tag and tag not in tag_groups.keys():
-            raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tag_groups.keys())}")
+            raise ChangelogException(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tag_groups.keys())}")
         if not message:
-            raise Exception(f"No message for change: '{cl_line}'")
+            raise ChangelogException(f"No message for change: '{cl_line}'")
         if message in list(tag_default_messages.values()):
-            raise Exception(f"Don't use default message for change: '{cl_line}'")
+            raise ChangelogException(f"Don't use default message for change: '{cl_line}'")
 
         if tag:
             cl_changes.append({
@@ -127,10 +131,10 @@ def parse_changelog(message: str, tags_config: dict[str, dict[str, str]]) -> dic
             # Append line without a tag to the previous change
             cl_changes[-1]["message"] += f" {change_parse_result['message']}"
         else:
-            raise Exception(f"Change with no tag: {cl_line}")
+            raise ChangelogException(f"Change with no tag: {cl_line}")
 
     if len(cl_changes) == 0:
-        raise Exception("No changes found in the changelog. Use special label if changelog is not expected.")
+        raise ChangelogException("No changes found in the changelog. Use special label if changelog is not expected.")
 
     return {
         "author": str.strip(cl_parse_result.group("author") or "") or None,  # We need this to be None, not empty
@@ -151,7 +155,7 @@ def process_pull_request(pr: github.PullRequest, tags_config: dict[str, dict[str
         changelog = build_changelog(pr, tags_config)
         changelog_emojified = emojify_changelog(changelog, tags_config)
         validate_changelog(changelog_emojified)
-    except Exception as e:
+    except ChangelogException as e:
         print(f"Changelog parsing error: {e}")
         return False
     return True
