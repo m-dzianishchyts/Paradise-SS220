@@ -31,7 +31,7 @@ LABEL_CL_VALID = ":scroll: CL валиден"
 LABEL_CL_NOT_NEEDED = ":scroll: CL не требуется"
 
 
-def load_yaml_config(path: str | Path) -> dict:
+def load_yaml_config(path: str | Path) -> dict[str, dict[str, str]]:
     """Load YAML configuration from a file."""
     with open(path, 'r') as file:
         yaml = YAML(typ='safe', pure=True)
@@ -94,7 +94,7 @@ def emojify_changelog(changelog: dict, tags_config: dict):
     return changelog_copy
 
 
-def parse_changelog(message: str, tags_config: dict) -> dict:
+def parse_changelog(message: str, tags_config: dict[str, dict[str, str]]) -> dict:
     """Parse changelog from PR message."""
     tag_groups, tag_default_messages = tags_config["tags"], tags_config["defaults"]
 
@@ -115,7 +115,7 @@ def parse_changelog(message: str, tags_config: dict) -> dict:
             raise Exception(f"Invalid tag: '{cl_line}'. Valid tags: {', '.join(tag_groups.keys())}")
         if not message:
             raise Exception(f"No message for change: '{cl_line}'")
-        if message in list(tag_default_messages[tag_groups[tag]].values()):
+        if message in list(tag_default_messages.values()):
             raise Exception(f"Don't use default message for change: '{cl_line}'")
 
         if tag:
@@ -138,14 +138,14 @@ def parse_changelog(message: str, tags_config: dict) -> dict:
     }
 
 
-def build_changelog(pr: github.PullRequest, tags_config: dict) -> dict:
+def build_changelog(pr: github.PullRequest, tags_config: dict[str, dict[str, str]]) -> dict:
     """Build and return a structured changelog."""
     changelog = parse_changelog(pr.body, tags_config)
     changelog["author"] = changelog.get("author") or pr.user.login
     return changelog
 
 
-def process_pull_request(pr: github.PullRequest, tags_config: dict):
+def process_pull_request(pr: github.PullRequest, tags_config: dict[str, dict[str, str]]):
     """Process and validate the pull request's changelog."""
     try:
         changelog = build_changelog(pr, tags_config)
