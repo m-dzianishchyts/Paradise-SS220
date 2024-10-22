@@ -168,7 +168,7 @@ def main():
 
     if not token:
         print("BOT_TOKEN was not provided.")
-        return
+        exit(1)
 
     with open(event_path, 'r') as f:
         event_data = json.load(f)
@@ -197,10 +197,12 @@ def main():
         return
 
     tags_config = load_yaml_config(TAGS_CONFIG_PATH)
-    validation_result = process_pull_request(pr, tags_config)
-    update_labels(pr, cl_valid=validation_result)
+    cl_valid = process_pull_request(pr, tags_config)
+    update_labels(pr, cl_valid=cl_valid)
 
-    print(f"Changelog is {'valid' if validation_result else 'invalid'}.")
+    print(f"Changelog is {'valid' if cl_valid else 'invalid'}.")
+    if not cl_valid:
+        exit(2)
 
 
 if __name__ == "__main__":
