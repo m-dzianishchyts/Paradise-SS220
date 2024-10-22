@@ -8,7 +8,7 @@ SUBSYSTEM_DEF(jobs)
 
 	//List of all jobs
 	var/list/occupations = list()
-	var/list/name_occupations = list()	//Dict of all jobs, keys are titles
+	var/list/name_occupations = list()
 	var/list/type_occupations = list()	//Dict of all jobs, keys are types
 	var/list/prioritized_jobs = list() // List of jobs set to priority by HoP/Captain
 	var/list/id_change_records = list() // List of all job transfer records
