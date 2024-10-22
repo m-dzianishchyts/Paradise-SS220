@@ -47,7 +47,7 @@ def is_label_set_manually(label_name: str, pr_events: list[github.IssueEvent], b
     """Find latest event for the label and make sure it wasn't set by the bot."""
     events_labeled = list(event for event in pr_events if event.event == "labeled" and event.label.name == label_name)
     events_sorted = sorted(events_labeled, key=lambda event: event.created_at, reverse=True)
-    if len(events_sorted):
+    if not len(events_sorted):
         raise Exception(f"No event found related to label '{label_name}'")
 
     return events_sorted[0].actor.id != bot_id
