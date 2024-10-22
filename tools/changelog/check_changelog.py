@@ -179,7 +179,7 @@ def main():
         print("PR is a mirror PR - changelog not needed.")
         cl_required = False
 
-    if all(label.name != LABEL_CL_NOT_NEEDED for label in pr.labels):
+    if any(label.name == LABEL_CL_NOT_NEEDED for label in pr.labels):
         print("PR is marked as not requiring a changelog (label).")
         cl_required = False
 
