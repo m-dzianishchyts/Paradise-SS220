@@ -45,18 +45,25 @@ def find_label(label_name: str, pr_labels: list[github.Label]):
 def update_labels(pr: github.PullRequest, cl_required: bool = True, cl_valid: bool = None):
     """Update PR labels based on validation result."""
     if not cl_required:
-        pr.remove_from_labels(LABEL_CL_VALID)
-        pr.remove_from_labels(LABEL_CL_INVALID)
+        if find_label(LABEL_CL_VALID, pr.labels):
+            pr.remove_from_labels(LABEL_CL_VALID)
+        if find_label(LABEL_CL_INVALID, pr.labels):
+            pr.remove_from_labels(LABEL_CL_INVALID)
         if not find_label(LABEL_CL_NOT_NEEDED, pr.labels):
             pr.add_to_labels(LABEL_CL_NOT_NEEDED)
         return
 
+    if cl_valid is None:
+        raise Exception("Changelog is required but no validation result is provided.")
+
     if cl_valid:
-        pr.remove_from_labels(LABEL_CL_INVALID)
+        if find_label(LABEL_CL_INVALID, pr.labels):
+            pr.remove_from_labels(LABEL_CL_INVALID)
         if not find_label(LABEL_CL_VALID, pr.labels):
             pr.add_to_labels(LABEL_CL_VALID)
     else:
-        pr.remove_from_labels(LABEL_CL_VALID)
+        if find_label(LABEL_CL_VALID, pr.labels):
+            pr.remove_from_labels(LABEL_CL_VALID)
         if not find_label(LABEL_CL_INVALID, pr.labels):
             pr.add_to_labels(LABEL_CL_INVALID)
 
