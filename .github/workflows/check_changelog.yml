@@ -32,4 +32,4 @@ jobs:
       - name: Changelog validation
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-        run: python tools/changelog/check_changelog.py
+        run: cd tools/changelog && python check_changelog.py
