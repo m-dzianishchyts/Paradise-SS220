@@ -26,11 +26,11 @@ jobs:
       - name: Run the changelog sync script
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-          TARGET_REPO: "ss220club/Paradise-SS220"
-          TARGET_BRANCH: "master"
-          UPSTREAM_REPO: "ParadiseSS13/Paradise"
-          UPSTREAM_BRANCH: "master"
-          MERGE_BRANCH: "merge-upstream"
-          TRANSLATE_CHANGES: "true"
+          TARGET_REPO: 'm-dzianishchyts/Paradise-SS220'
+          TARGET_BRANCH: 'master'
+          UPSTREAM_REPO: 'ParadiseSS13/Paradise'
+          UPSTREAM_BRANCH: 'master'
+          MERGE_BRANCH: 'merge-upstream'
+          TRANSLATE_CHANGES: 'true'
         run: |
           python3 merge_upstream.py
