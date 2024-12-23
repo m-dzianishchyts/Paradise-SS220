@@ -153,7 +153,7 @@ def build_details(commit_log: list[str],
     pull_number_pattern = re.compile("#(?P<id>\\d+)")
     details = PullDetails(
         changelog={},
-        merge_order=[match.group("id") for c in commit_log if (match := re.search(pull_number_pattern, c))],
+        merge_order=[int(match.group("id")) for c in commit_log if (match := re.search(pull_number_pattern, c))],
         config_changes=[],
         sql_changes=[],
         wiki_changes=[]
