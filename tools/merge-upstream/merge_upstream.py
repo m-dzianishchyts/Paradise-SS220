@@ -298,12 +298,13 @@ def prepare_pull_body(details: PullDetails) -> str:
 
     pull_body += f"\n## Changelog\n"
     pull_body += f":cl: {CHANGELOG_AUTHOR}\n" if CHANGELOG_AUTHOR else ":cl:\n"
+    print(details)
     for pull_id in details["merge_order"]:
         if pull_id not in details["changelog"]:
             continue
         for change in details["changelog"][pull_id]:
             tag = change["tag"]
-            message = change["tag"]
+            message = change["message"]
             translated_message = change.get("translated_message")
             pull_url = silence_pull_url(change["pull"].html_url)
             if translated_message:
