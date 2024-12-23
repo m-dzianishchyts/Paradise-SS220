@@ -7,6 +7,8 @@ import typing
 
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
 from github import Github
 from github.PullRequest import PullRequest
 from github.Repository import Repository
@@ -236,7 +238,8 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
     if not changes:
         return
 
-    with open("translation_context.txt", encoding="utf-8") as f:
+    script_dir = Path(__file__).resolve().parent
+    with open(script_dir.joinpath("translation_context.txt"), encoding="utf-8") as f:
         context = "\n".join(f.readlines()).strip()
     text = "\n".join([change["message"] for change in changes])
 
