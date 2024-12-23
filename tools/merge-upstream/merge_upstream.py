@@ -201,11 +201,11 @@ def process_pull(details: PullDetails, pull: PullRequest):
     try:
         for label in labels:
             if label == UpstreamLabel.CONFIG_CHANGE.value:
-                details["config_changes"] += pull
+                details["config_changes"].append(pull)
             elif label == UpstreamLabel.SQL_CHANGE.value:
-                details["sql_changes"] += pull
+                details["sql_changes"].append(pull)
             elif label == UpstreamLabel.WIKI_CHANGE.value:
-                details["wiki_changes"] += pull
+                details["wiki_changes"].append(pull)
 
         parsed = changelog_utils.parse_changelog(pull.body)
         if parsed and parsed["changes"]:
@@ -228,6 +228,7 @@ def process_pull(details: PullDetails, pull: PullRequest):
 
 def translate_changelog(changelog: typing.Dict[int, list[Change]]):
     """Translate changelog using OpenAI API."""
+    print("Translating changelog...")
     if not changelog:
         return
 
@@ -332,12 +333,13 @@ def create_pr(repo: Repository, details: PullDetails):
 
 def check_pull_exists(repo: Repository, base: str, head: str):
     """Check if the merge pull request already exist. In this case, fail the action."""
+    print("Checking on existing pull request...")
     existing_pulls = repo.get_pulls(state="open", base=base, head=head)
     for pull in existing_pulls:
         print(f"Pull request already exists. {pull.html_url}")
 
     if existing_pulls.totalCount:
-        exit(123456)
+        exit(1)
 
 if __name__ == "__main__":
     github = Github(GITHUB_TOKEN)
