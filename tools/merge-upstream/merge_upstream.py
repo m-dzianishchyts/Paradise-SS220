@@ -59,12 +59,17 @@ def check_env():
         "UPSTREAM_BRANCH",
         "MERGE_BRANCH"
     ]
+    if TRANSLATE_CHANGES:
+        required_vars.append("OPENAI_API_KEY")
     missing_vars = [var for var in required_vars if not os.getenv(var)]
     if missing_vars:
         raise EnvironmentError(f"Missing required environment variables: {', '.join(missing_vars)}")
 
 
 # Environment variables
+TRANSLATE_CHANGES = os.getenv("TRANSLATE_CHANGES", "False").lower() in ("true", "yes", "1")
+CHANGELOG_AUTHOR = os.getenv("CHANGELOG_AUTHOR", "")
+
 check_env()
 GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 TARGET_REPO = os.getenv("TARGET_REPO")
@@ -72,8 +77,6 @@ TARGET_BRANCH = os.getenv("TARGET_BRANCH")
 UPSTREAM_REPO = os.getenv("UPSTREAM_REPO")
 UPSTREAM_BRANCH = os.getenv("UPSTREAM_BRANCH")
 MERGE_BRANCH = os.getenv("MERGE_BRANCH")
-CHANGELOG_AUTHOR = os.getenv("CHANGELOG_AUTHOR", "")
-TRANSLATE_CHANGES = os.getenv("TRANSLATE_CHANGES", "False").lower() in ("true", "yes", "1")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 
