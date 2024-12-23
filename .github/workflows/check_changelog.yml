@@ -41,5 +41,5 @@ jobs:
 
       - name: Changelog validation
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
         run: python check_changelog.py
