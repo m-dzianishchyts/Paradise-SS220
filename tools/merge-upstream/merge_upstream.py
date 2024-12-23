@@ -129,7 +129,7 @@ def detect_commits() -> list[str]:
     return commit_log
 
 
-def fetch_pull(pull_id) -> PullRequest | None:
+def fetch_pull(pull_number) -> PullRequest | None:
     """Fetch the pull request from GitHub."""
     github = Github(GITHUB_TOKEN)
     repo = github.get_repo(UPSTREAM_REPO)
@@ -137,9 +137,9 @@ def fetch_pull(pull_id) -> PullRequest | None:
     max_retries = 3
     for attempt in range(max_retries):
         try:
-            return repo.get_pull(int(pull_id))
+            return repo.get_pull(int(pull_number))
         except Exception as e:
-            print(f"Error fetching PR #{pull_id}: {e}")
+            print(f"Error fetching PR #{pull_number}: {e}")
             if attempt + 1 < max_retries:
                 time.sleep(2)
             else:
@@ -150,10 +150,10 @@ def build_details(commit_log: list[str],
                   translate: typing.Optional[typing.Callable[[typing.Dict[int, list[Change]]], None]]) -> PullDetails:
     """Generate data from parsed commits."""
     print("Building details...")
-    pull_id_pattern = re.compile("#(?P<id>\\d+)")
+    pull_number_pattern = re.compile("#(?P<id>\\d+)")
     details = PullDetails(
         changelog={},
-        merge_order=[match.group("id") for c in commit_log if (match := re.search(pull_id_pattern, c))],
+        merge_order=[match.group("id") for c in commit_log if (match := re.search(pull_number_pattern, c))],
         config_changes=[],
         sql_changes=[],
         wiki_changes=[]
@@ -163,31 +163,31 @@ def build_details(commit_log: list[str],
     with ThreadPoolExecutor() as executor:
         futures = {}
         for commit in commit_log:
-            match = re.search(pull_id_pattern, commit)
+            match = re.search(pull_number_pattern, commit)
             if not match:
                 print(f"Skipping {commit}")
                 continue
 
-            pull_id = int(match.group("id"))
+            pull_number = int(match.group("id"))
 
-            if pull_id in pull_cache:
+            if pull_number in pull_cache:
                 print(
                     f"WARNING: pull duplicate found.\n"
-                    f"1: {pull_cache[pull_id]}\n"
+                    f"1: {pull_cache[pull_number]}\n"
                     f"2: {commit}"
                 )
                 print(f"Skipping {commit}")
                 continue
 
-            pull_cache[pull_id] = commit
-            futures[executor.submit(fetch_pull, pull_id)] = pull_id
+            pull_cache[pull_number] = commit
+            futures[executor.submit(fetch_pull, pull_number)] = pull_number
 
         for future in as_completed(futures):
-            pull_id = futures[future]
+            pull_number = futures[future]
             pull: PullRequest | None = future.result()
 
             if not pull:
-                print(f"Pull {pull_id} was not fetched. Skipping.")
+                print(f"Pull {pull_number} was not fetched. Skipping.")
                 continue
 
             process_pull(details, pull)
@@ -200,7 +200,7 @@ def build_details(commit_log: list[str],
 
 def process_pull(details: PullDetails, pull: PullRequest):
     """Handle fetched pull request data during details building."""
-    pull_id = pull.id
+    pull_number = pull.number
     labels = [label.name for label in pull.get_labels()]
     pull_changes = []
     try:
@@ -222,7 +222,7 @@ def process_pull(details: PullDetails, pull: PullRequest):
                 ))
 
         if pull_changes:
-            details["changelog"][pull_id] = pull_changes
+            details["changelog"][pull_number] = pull_changes
     except Exception as e:
         print(
             f"An error occurred while processing {pull.html_url}\n"
@@ -302,10 +302,10 @@ def prepare_pull_body(details: PullDetails) -> str:
     pull_body += f"\n## Changelog\n"
     pull_body += f":cl: {CHANGELOG_AUTHOR}\n" if CHANGELOG_AUTHOR else ":cl:\n"
     print(details)
-    for pull_id in details["merge_order"]:
-        if pull_id not in details["changelog"]:
+    for pull_number in details["merge_order"]:
+        if pull_number not in details["changelog"]:
             continue
-        for change in details["changelog"][pull_id]:
+        for change in details["changelog"][pull_number]:
             tag = change["tag"]
             message = change["message"]
             translated_message = change.get("translated_message")
