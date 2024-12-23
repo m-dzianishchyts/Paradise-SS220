@@ -336,7 +336,7 @@ def check_pull_exists(repo: Repository, base: str, head: str):
     for pull in existing_pulls:
         print(f"Pull request already exists. {pull.html_url}")
 
-    if existing_pulls:
+    if existing_pulls.totalCount:
         exit(1)
 
 if __name__ == "__main__":
