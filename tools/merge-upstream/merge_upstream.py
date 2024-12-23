@@ -337,7 +337,7 @@ def check_pull_exists(repo: Repository, base: str, head: str):
         print(f"Pull request already exists. {pull.html_url}")
 
     if existing_pulls.totalCount:
-        exit(1)
+        exit(123456)
 
 if __name__ == "__main__":
     github = Github(GITHUB_TOKEN)
