@@ -13,16 +13,18 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
 
-      - name: Fetch base branch
-        run: git fetch origin master
+      - name: Fetch head branch
+        run: git fetch origin ${{ github.head_ref }}
 
       - name: Check if master is merged
         run: |
-          git checkout merge-upstream
-          if git merge-base --is-ancestor origin/master HEAD; then
+          git checkout ${{ github.head_ref }}
+          if git merge-base --is-ancestor origin/${{ github.base_ref }} HEAD; then
             exit 0
           else
-            echo "Master branch is NOT merged into this branch."
+            echo "Base branch is NOT merged into the head branch. Merge base branch to keep CI checks relevant."
             exit 1
           fi
