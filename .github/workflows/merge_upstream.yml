@@ -6,11 +6,16 @@ on:
 jobs:
   merge-upstream:
     runs-on: ubuntu-latest
-    env:
-      TARGET_REPO: 'm-dzianishchyts/Paradise-SS220'
-      TARGET_BRANCH: 'master'
 
     steps:
+      - id: create_token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - run: echo "GH_TOKEN=${{ steps.create_token.outputs.token }}" >> "$GITHUB_ENV"
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -23,15 +28,17 @@ jobs:
 
       - name: Download the script
         run: |
-          wget https://raw.githubusercontent.com/${{ env.TARGET_REPO }}/${{ env.TARGET_BRANCH }}/tools/changelog/changelog_utils.py
-          wget https://raw.githubusercontent.com/${{ env.TARGET_REPO }}/${{ env.TARGET_BRANCH }}/tools/merge-upstream/merge_upstream.py
+          wget https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/tools/changelog/changelog_utils.py
+          wget https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/tools/merge-upstream/merge_upstream.py
 
       - name: Run the script
         env:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ env.GH_TOKEN }}
+          TARGET_REPO: 'ss220club/Paradise-SS220'
+          TARGET_BRANCH: 'master'
           UPSTREAM_REPO: 'ParadiseSS13/Paradise'
           UPSTREAM_BRANCH: 'master'
-          MERGE_BRANCH: 'merge-upstream-test'
+          MERGE_BRANCH: 'merge-upstream'
           TRANSLATE_CHANGES: 'true'
           CHANGELOG_AUTHOR: 'ParadiseSS13'
         run: |

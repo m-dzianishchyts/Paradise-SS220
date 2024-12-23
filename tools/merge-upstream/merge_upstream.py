@@ -25,7 +25,7 @@ class DownstreamLabel(str, enum.Enum):
 
 class PullDetails(typing.TypedDict):
     changelog: typing.Dict[str, list[str]]
-    merge_oder: list[str]
+    merge_order: list[str]
     config_changes: typing.Dict[str, PullRequest]
     sql_changes: typing.Dict[str, PullRequest]
     wiki_changes: typing.Dict[str, PullRequest]
@@ -79,9 +79,9 @@ def run_command(command) -> str:
 def setup_repo():
     """Clone the repository and set up the upstream remote."""
     print(f"Cloning repository: {TARGET_REPO}")
-    run_command(f"git clone https://{GITHUB_TOKEN}@github.com/{TARGET_REPO}.git repo")
+    run_command(f"git clone https://x-access-token:{GITHUB_TOKEN}@github.com/{TARGET_REPO}.git repo")
     os.chdir("repo")
-    run_command(f"git remote add upstream https://{GITHUB_TOKEN}@github.com/{UPSTREAM_REPO}.git")
+    run_command(f"git remote add upstream https://x-access-token:{GITHUB_TOKEN}@github.com/{UPSTREAM_REPO}.git")
     print(run_command(f"git remote -v"))
 
 
@@ -136,7 +136,7 @@ def build_details(commit_log: list[str]) -> PullDetails:
     print("Building details...")
     details = PullDetails(
         changelog={},
-        merge_oder=[match.group()[1:] for c in commit_log if (match := re.search("#\\d+", c))],
+        merge_order=[match.group()[1:] for c in commit_log if (match := re.search("#\\d+", c))],
         config_changes={},
         sql_changes={},
         wiki_changes={}
@@ -240,7 +240,7 @@ def prepare_pull_body(details: PullDetails) -> str:
 
     pull_body += f"\n## Changelog\n"
     pull_body += f":cl: {CHANGELOG_AUTHOR}\n" if CHANGELOG_AUTHOR else ":cl:\n"
-    for pull_id in details["merge_oder"]:
+    for pull_id in details["merge_order"]:
         if pull_id not in details["changelog"]:
             continue
         pull_body += f"{'\n'.join(details["changelog"][pull_id])}\n"
