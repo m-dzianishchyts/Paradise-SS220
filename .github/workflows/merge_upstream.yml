@@ -32,6 +32,11 @@ jobs:
           wget https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/tools/merge-upstream/merge_upstream.py
           wget https://raw.githubusercontent.com/${{ github.repository }}/${{ github.ref_name }}/tools/merge-upstream/translation_context.txt
 
+      - name: List files in current directory
+        run: |
+          echo "Current directory: $(pwd)"
+          ls -l
+
       - name: Run the script
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
