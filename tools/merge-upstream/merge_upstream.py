@@ -256,7 +256,7 @@ def translate_changelog(changelog: typing.Dict[int, list[Change]]):
         top_p=1.0,
         model="gpt-4o",
     )
-    translated_text = response['choices'][0]['message']['content']
+    translated_text = response.choices[0].message.content
 
     for change, translated_message in zip(changes, translated_text.split("\n"), strict=True):
         change["translated_message"] = translated_message
