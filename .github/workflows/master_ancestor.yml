@@ -3,11 +3,12 @@ name: Check Master Merged
 on:
   pull_request:
     branches:
-      - merge-upstream
+      - master
 
 jobs:
   check-master-merged:
     runs-on: ubuntu-latest
+    if: github.head_ref == 'merge-upstream'
 
     steps:
       - name: Checkout repository
