@@ -145,7 +145,7 @@ def build_details(commit_log: list[str],
                   translate: typing.Optional[typing.Callable[[typing.Dict[int, list[Change]]], None]]) -> PullDetails:
     """Generate data from parsed commits."""
     print("Building details...")
-    pull_id_pattern = re.compile("#(?P<id>\d+)")
+    pull_id_pattern = re.compile("#(?P<id>\\d+)")
     details = PullDetails(
         changelog={},
         merge_order=[match.group("id") for c in commit_log if (match := re.search(pull_id_pattern, c))],
