@@ -1,0 +1,27 @@
+name: Check Master Merged
+
+on:
+  pull_request:
+    branches:
+      - merge-upstream
+
+jobs:
+  check-master-merged:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Check if master is merged
+        run: |
+          git checkout merge-upstream
+          if git merge-base --is-ancestor origin/master HEAD; then
+            exit 0
+          else
+            echo "Master branch is NOT merged into this branch."
+            exit 1
+          fi
