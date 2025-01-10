@@ -35,7 +35,7 @@ jobs:
       - name: Run the script
         env:
           GITHUB_TOKEN: ${{ env.GH_TOKEN }}
-          TARGET_REPO: 'ss220club/Paradise-SS220'
+          TARGET_REPO: 'm-dzianishchyts/Paradise-SS220'
           TARGET_BRANCH: 'master'
           UPSTREAM_REPO: 'ParadiseSS13/Paradise'
           UPSTREAM_BRANCH: 'master'
