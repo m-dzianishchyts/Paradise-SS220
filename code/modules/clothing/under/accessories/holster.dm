@@ -50,7 +50,7 @@
 		return
 
 	holstered = W
-	user.unequip(holstered)
+	user.unequip(holstered, silent = TRUE) // SS220 EDIT: silent = TRUE
 	holstered.forceMove(src)
 	holstered.add_fingerprint(user)
 	user.visible_message("<span class='notice'>[user] holsters [holstered].</span>", "<span class='notice'>You holster [holstered].</span>")
